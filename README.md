@@ -1,5 +1,6 @@
 <div align="center">
 <h1> ZeroMamba </h1>
+<h3> ZeroMamba: Exploring Visual State Space Model for Zero-Shot Learning </h3>
 </div>
 
 ## Notes
