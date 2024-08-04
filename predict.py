@@ -53,6 +53,24 @@ class Classifier_custom(nn.Module):
         F_p = torch.einsum('bir,bfr->bif', A, av)
         Pred_att = torch.einsum('iv,vf,bif->bi', vv, self.W2, F_p)
         return Pred_att
+
+
+def get_pred_feats(args, model, data_loader):
+    model.eval()
+    pred_feats = []
+    for _, (batch_data, _) in enumerate(data_loader):
+        batch_data = batch_data.to(args.device)
+        with torch.no_grad():
+            backbone_out_pre, backbone_out = model.VisionMamba(batch_data)
+            pred_feat = model.clf_head(backbone_out)
+            pred_feat_pre = model.clf_head2(model.VisionMamba.classifier2(backbone_out_pre))
+            if args.norm_feat_pre:
+                pred_feat_pre = l2_norm2(pred_feat_pre)
+            pred_feat = pred_feat + pred_feat_pre
+        pred_feats.append(pred_feat.cpu().data.numpy())
+    pred_feats = np.concatenate(pred_feats, 0)
+    return pred_feats
+
 # ======================================== data prepare ======================================== #
 myloader = MyDataloader(args)
 # Testing Transformations
@@ -97,47 +115,34 @@ model = nn.ModuleDict({
 for param in model.parameters():
     param.requires_grad = False
 
+model = model.to(args.device)
 
-model1 = model.to(args.device)
-model2 = model.to(args.device)
 weightsRoot = os.path.dirname(os.path.abspath(__file__)) + "/checkpoints/"
-checkpoint_path_CZSL = weightsRoot + f"{args.dataset}_bestCZSL.pth"
-checkpoint_path_GZSL = weightsRoot + f"{args.dataset}_bestGZSL.pth"
-model1.load_state_dict(torch.load(checkpoint_path_CZSL), strict=False)
-model2.load_state_dict(torch.load(checkpoint_path_GZSL), strict=False)
+checkpoint_path_CZSL = weightsRoot + f"ZeroMamba_{args.dataset}_bestCZSL.pth"
+model.load_state_dict(torch.load(checkpoint_path_CZSL), strict=False)
 # ======================================== model config ======================================== #
 seen_att = myloader.att[myloader.seenclasses]
 unseen_att = myloader.att[myloader.unseenclasses]
 
 # -------------------- Test -------------------- #
-def get_pred_feats(args, model, data_loader):
-    model.eval()
-    pred_feats = []
-    for _, (batch_data, _) in enumerate(data_loader):
-        batch_data = batch_data.to(args.device)
-        with torch.no_grad():
-            backbone_out_pre, backbone_out = model.VisionMamba(batch_data)
-            pred_feat = model.clf_head(backbone_out)
-            pred_feat_pre = model.clf_head2(model.VisionMamba.classifier2(backbone_out_pre))
-            if args.norm_feat_pre:
-                pred_feat_pre = l2_norm2(pred_feat_pre)
-            pred_feat = pred_feat + pred_feat_pre
-        pred_feats.append(pred_feat.cpu().data.numpy())
-    pred_feats = np.concatenate(pred_feats, 0)
-    return pred_feats
-
 with torch.no_grad():
-    unseen_pred_feats1 = get_pred_feats(args, model1, test_unseen_data_loader)
+    unseen_pred_feats = get_pred_feats(args, model, test_unseen_data_loader)
 
-    seen_pred_feats2 = get_pred_feats(args, model2, test_seen_data_loader)
-    unseen_pred_feats2 = get_pred_feats(args, model2, test_unseen_data_loader)
-
-# ZSL
-zsl_unseen_sim = unseen_pred_feats1 @ unseen_att.T.cpu().numpy()
+# CZSL
+zsl_unseen_sim = unseen_pred_feats @ unseen_att.T.cpu().numpy()
 pred_labels = np.argmax(zsl_unseen_sim, axis=1)
 zsl_unseen_pred_labels = myloader.unseenclasses[pred_labels]
 CZSL = compute_accuracy(zsl_unseen_pred_labels.numpy(), 
                         myloader.test_unseen_labels.numpy(), myloader.unseenclasses.numpy())
+
+
+# GZSL
+checkpoint_path_GZSL = weightsRoot + f"ZeroMamba_{args.dataset}_bestGZSL.pth"
+model.load_state_dict(torch.load(checkpoint_path_GZSL), strict=False)
+with torch.no_grad():
+    seen_pred_feats = get_pred_feats(args, model, test_seen_data_loader)
+    unseen_pred_feats = get_pred_feats(args, model, test_unseen_data_loader)
+
 
 # Calibrated stacking
 Cs_mat = np.zeros(myloader.att.shape[0])
@@ -145,13 +150,13 @@ Cs_mat[myloader.seenclasses] = args.gamma
 
 # GZSL
 # seen classes
-gzsl_seen_sim = softmax(seen_pred_feats2 @ myloader.att.T.cpu().numpy(), axis=1) - Cs_mat
+gzsl_seen_sim = softmax(seen_pred_feats @ myloader.att.T.cpu().numpy(), axis=1) - Cs_mat
 gzsl_seen_pred_labels = np.argmax(gzsl_seen_sim, axis=1)
 S = compute_accuracy(gzsl_seen_pred_labels,
                         myloader.test_seen_labels.numpy(), myloader.seenclasses.numpy())
 
 # unseen classes
-gzsl_unseen_sim = softmax(unseen_pred_feats2 @ myloader.att.T.cpu().numpy(), axis=1) - Cs_mat
+gzsl_unseen_sim = softmax(unseen_pred_feats @ myloader.att.T.cpu().numpy(), axis=1) - Cs_mat
 gzsl_unseen_pred_labels = np.argmax(gzsl_unseen_sim, axis=1)
 U = compute_accuracy(gzsl_unseen_pred_labels, 
                         myloader.test_unseen_labels.numpy(), myloader.unseenclasses.numpy())
