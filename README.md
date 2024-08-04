@@ -48,5 +48,25 @@ Results of our released models using various evaluation protocols on three datas
 
 ### Preparing Dataset and Model
 
-We provide trained models and extracted features ([Google Drive]())on three different datasets: [CUB](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html), [SUN](http://cs.brown.edu/~gmpatter/sunattributes.html), [AWA2](http://cvml.ist.ac.at/AwA2/) in the CZSL and GZSL settings. 
-
+We provide trained models and extracted features ([Google Drive]())on three different datasets: [CUB](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html), [SUN](http://cs.brown.edu/~gmpatter/sunattributes.html), [AWA2](http://cvml.ist.ac.at/AwA2/) in the CZSL and GZSL settings. The structure:
+```
+ZeroMamba/
+├── data
+│   ├── attribute
+│   ├── dataset
+│   │   ├── AWA2
+│   │   │   ├── Animals_with_Attributes2
+│   │   │   └── ...
+│   │   ├── CUB
+│   │   │   ├── CUB_200_2011
+│   │   │   └── ...
+│   │   ├── SUN
+│   │   │   ├── images
+│   │   │   └── ...
+│   │   ├── xlsa
+│   │   └── ...
+│   ├── w2v
+│   └── ...
+├── extract_feature
+└── ...
+```
