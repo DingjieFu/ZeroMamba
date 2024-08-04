@@ -4,7 +4,7 @@ import argparse
 
 def parse_args():
     projectPath = os.path.dirname(os.path.abspath(__file__))
-    datarootPath = "/data/ZeroShot"
+    datarootPath = projectPath + "/data"
     parser = argparse.ArgumentParser(description="Vision Mamba for ZSL")
     # ======================================== Path Config ======================================== #
     parser.add_argument('--cfgRoot', type=str, 
