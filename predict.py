@@ -101,8 +101,8 @@ for param in model.parameters():
 model1 = model.to(args.device)
 model2 = model.to(args.device)
 weightsRoot = os.path.dirname(os.path.abspath(__file__)) + "/checkpoints/"
-checkpoint_path_CZSL = weightsRoot + f"ZeroMamba_{args.dataset}_bestCZSL.pth"
-checkpoint_path_GZSL = weightsRoot + f"ZeroMamba_{args.dataset}_bestGZSL.pth"
+checkpoint_path_CZSL = weightsRoot + f"{args.dataset}_bestCZSL.pth"
+checkpoint_path_GZSL = weightsRoot + f"{args.dataset}_bestGZSL.pth"
 model1.load_state_dict(torch.load(checkpoint_path_CZSL), strict=False)
 model2.load_state_dict(torch.load(checkpoint_path_GZSL), strict=False)
 # ======================================== model config ======================================== #
