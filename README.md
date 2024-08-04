@@ -48,7 +48,7 @@ Results of our released models using various evaluation protocols on three datas
 
 ### Preparing Dataset and Model
 
-We provide trained models and extracted features ([Google Drive]())on three different datasets: [CUB](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html), [SUN](http://cs.brown.edu/~gmpatter/sunattributes.html), [AWA2](http://cvml.ist.ac.at/AwA2/) in the CZSL and GZSL settings. The structure:
+We provide trained models and extracted features ([Google Drive](https://drive.google.com/file/d/1gO7cFKXPXx41gw_COaXVO8WdGDd5VZ7g/view?usp=drive_link))on three different datasets: [CUB](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html), [SUN](http://cs.brown.edu/~gmpatter/sunattributes.html), [AWA2](http://cvml.ist.ac.at/AwA2/) in the CZSL and GZSL settings. The structure:
 ```
 ZeroMamba/
 ├── data
