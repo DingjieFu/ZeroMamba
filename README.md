@@ -1,12 +1,14 @@
 <div align="center">
 <h1> ZeroMamba </h1>
 </div>
+
+## Notes
 This repository includes the following materials for testing and checking our results reported in our paper:
 
 1. **<font color=blue>The testing codes</font>**
 2. **<font color=blue>The trained models</font>**
 
-### Results
+## Results
 Results of our released models using various evaluation protocols on three datasets, both in the CZSL and GZSL settings.
 
 | Dataset | Acc(CZSL) | U(GZSL) | S(GZSL) | H(GZSL) |
