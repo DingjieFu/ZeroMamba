@@ -71,3 +71,8 @@ ZeroMamba/
 ├── extract_feature
 └── ...
 ```
+### Script
+Running following commands in `./scripts/usage.sh`
+```
+
+```
