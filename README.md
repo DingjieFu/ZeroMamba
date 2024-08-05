@@ -71,7 +71,7 @@ ZeroMamba/
 ├── extract_feature
 └── ...
 ```
-### Script
+### Testing Script
 Running following commands in `./scripts/usage.sh`
 ```
 # AWA2
