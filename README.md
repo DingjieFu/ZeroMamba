@@ -3,6 +3,9 @@
 <h3> ZeroMamba: Exploring Visual State Space Model for Zero-Shot Learning </h3>
 </div>
 
+## News
+We will release the entire codes in the following days.
+
 ## Notes
 This repository includes the following materials for testing and checking our results reported in our paper:
 
