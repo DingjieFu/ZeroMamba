@@ -9,11 +9,10 @@
 ## News
 * **` Dec. 10th, 2024`:** This repository contains the training and testing code for the AAAI'25 paper titled with "***ZeroMamba: Exploring Visual State Space Model for Zero-Shot Learning***" ([arXiv](https://arxiv.org/pdf/2408.14868)). We will release the entire codes in the following days.
 
-## Overview
 
+## Overview
 ### Framework
 <div align="center"><img src="assets/framework.png" /></div>
-
 
 ### Main Results
 Results of our released models using various evaluation protocols on three datasets, both in the CZSL and GZSL settings.
@@ -58,6 +57,32 @@ cd ZeroMamba
 pip install -r requirements.txt
 ```
 
+
+## Datasets Preparation
+The structure:
+```
+ZeroMamba/
+├── data
+│   ├── attribute
+│   ├── dataset
+│   │   ├── AWA2
+│   │   │   ├── Animals_with_Attributes2
+│   │   │   └── ...
+│   │   ├── CUB
+│   │   │   ├── CUB_200_2011
+│   │   │   └── ...
+│   │   ├── SUN
+│   │   │   ├── images
+│   │   │   └── ...
+│   │   ├── xlsa
+│   │   └── ...
+│   ├── w2v
+│   └── ...
+├── utils
+└── ...
+```
+
+
 ## Training
 
 Running following commands in `./scripts/train.sh`
@@ -82,30 +107,10 @@ python train.py --model_name VMamba-S --model vmambav2_small_224\
 
 ## Testing
 
-### Preparing Dataset and Model
+### Preparing Model
 
-We provide trained models and extracted features ([Google Drive](https://drive.google.com/drive/folders/1VtmU_HqvjtdyNRyp0ou3RJwB3-CmdXGv?usp=drive_link))on three different datasets: [CUB](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html), [SUN](http://cs.brown.edu/~gmpatter/sunattributes.html), [AWA2](http://cvml.ist.ac.at/AwA2/) in the CZSL and GZSL settings. The structure:
-```
-ZeroMamba/
-├── data
-│   ├── attribute
-│   ├── dataset
-│   │   ├── AWA2
-│   │   │   ├── Animals_with_Attributes2
-│   │   │   └── ...
-│   │   ├── CUB
-│   │   │   ├── CUB_200_2011
-│   │   │   └── ...
-│   │   ├── SUN
-│   │   │   ├── images
-│   │   │   └── ...
-│   │   ├── xlsa
-│   │   └── ...
-│   ├── w2v
-│   └── ...
-├── extract_feature
-└── ...
-```
+We provide trained models([Google Drive](https://drive.google.com/drive/folders/1VtmU_HqvjtdyNRyp0ou3RJwB3-CmdXGv?usp=drive_link))on three different datasets: [CUB](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html), [SUN](http://cs.brown.edu/~gmpatter/sunattributes.html), [AWA2](http://cvml.ist.ac.at/AwA2/) in the CZSL and GZSL settings. Download and place them under `./checkpoints`
+
 ### Testing Script
 Running following commands in `./scripts/test.sh`
 ```
