@@ -4,8 +4,10 @@
 </div>
 
 
+
+
 ## News
-* **` Dec. 10th, 2024`:** We will release the entire codes in the following days.
+* **` Dec. 10th, 2024`:** This repository contains the training and testing code for the AAAI'25 paper titled with "***ZeroMamba: Exploring Visual State Space Model for Zero-Shot Learning***" ([arXiv](https://arxiv.org/pdf/2408.14868)). We will release the entire codes in the following days.
 
 ## Overview
 
@@ -117,7 +119,7 @@ python test.py --dataset SUN --gamma 0.35
 
 ## Acknowledgement
 
-This project is based on VMamba ([github](https://github.com/MzeroMiko/VMamba)). Thanks for their wonderful works.
+This project is partly based on VMamba ([github](https://github.com/MzeroMiko/VMamba)). Thanks for their wonderful works.
 
 ## Citation
 
