@@ -1,18 +1,19 @@
 <div align="center">
-<h1> ZeroMamba </h1>
+<h1> ZeroMamba [AAAI'25]🎉 </h1>
 <h3> ZeroMamba: Exploring Visual State Space Model for Zero-Shot Learning </h3>
 </div>
+
 
 ## News
 * **` Dec. 10th, 2024`:** We will release the entire codes in the following days.
 
-## Notes
-This repository includes the following materials for testing and checking our results reported in our paper:
+## Overview
 
-1. **<font color=blue>The testing codes</font>**
-2. **<font color=blue>The trained models</font>**
+### Framework
+<div align="center"><img src="assets/framework.png" /></div>
 
-## Results
+
+### Main Results
 Results of our released models using various evaluation protocols on three datasets, both in the CZSL and GZSL settings.
 
 | Dataset | Acc(CZSL) | U(GZSL) | S(GZSL) | H(GZSL) |
@@ -45,8 +46,37 @@ Results of our released models using various evaluation protocols on three datas
 - **Vision Mamba dependencies**
 
   - `cp -r ZeroMamba/VisionMambaModels/Vim/mamba_ssm <your env's site-packages path>`
+- `cd ZeroMamba/VisionMambaModels/VMamba/kernels/selective_scan && pip install .`
 
-  - `cd ZeroMamba/VisionMambaModels/VMamba/kernels/selective_scan && pip install .`
+- **Other dependencies**
+
+```
+git clone git@github.com:DingjieFu/ZeroMamba.git
+cd ZeroMamba
+pip install -r requirements.txt
+```
+
+## Training
+
+Running following commands in `./scripts/train.sh`
+```
+# AWA2
+python train.py --model_name VMamba-S --model vmambav2_small_224\
+    --ckpt vssm_small_0229_ckpt_epoch_222.pth --cfg  vmambav2_small_224.yaml\
+    --dataset AWA2 --gamma 0.98 --input_size 448 --batch_size 32\
+    --backbone_lr 1e-3 --head_lr 1e-3 --head2_lr 1e-4 --loss_L1 0.0
+# CUB
+python train.py --model_name VMamba-S --model vmambav2_small_224\
+    --ckpt vssm_small_0229_ckpt_epoch_222.pth --cfg  vmambav2_small_224.yaml\
+    --dataset CUB --gamma 0.3 --input_size 448 --batch_size 32\
+    --backbone_lr 1e-3 --head_lr 1e-3 --head2_lr 1e-4 --loss_L1 1.0
+# SUN
+python train.py --model_name VMamba-S --model vmambav2_small_224\
+    --ckpt vssm_small_0229_ckpt_epoch_222.pth --cfg  vmambav2_small_224.yaml\
+    --dataset SUN --gamma 0.35 --input_size 448 --batch_size 32\
+    --backbone_lr 1e-3 --head_lr 1e-3 --head2_lr 1e-4 --loss_L1 0.2
+```
+
 
 ## Testing
 
@@ -75,12 +105,30 @@ ZeroMamba/
 └── ...
 ```
 ### Testing Script
-Running following commands in `./scripts/usage.sh`
+Running following commands in `./scripts/test.sh`
 ```
 # AWA2
-python predict.py --dataset AWA2 --gamma 0.98
+python test.py --dataset AWA2 --gamma 0.98
 # CUB
-python predict.py --dataset CUB --gamma 0.3
+python test.py --dataset CUB --gamma 0.3
 # SUN
-python predict.py --dataset SUN --gamma 0.35
+python test.py --dataset SUN --gamma 0.35
 ```
+
+## Acknowledgement
+
+This project is based on VMamba ([github](https://github.com/MzeroMiko/VMamba)). Thanks for their wonderful works.
+
+## Citation
+
+If you find ZeroMamba is useful in your research or applications, please consider giving us a star 🌟 and citing it by the following BibTeX entry.
+
+```bibtex
+@article{hou2024zeromamba,
+  title={ZeroMamba: Exploring Visual State Space Model for Zero-Shot Learning},
+  author={Hou, Wenjin and Fu, Dingjie and Li, Kun and Chen, Shiming and Fan, Hehe and Yang, Yi},
+  journal={arXiv preprint arXiv:2408.14868},
+  year={2024}
+}
+```
+
