@@ -4,7 +4,7 @@
 </div>
 
 ## News
-We will release the entire codes in the following days.
+* **` Dec. 10th, 2024`:** We will release the entire codes in the following days.
 
 ## Notes
 This repository includes the following materials for testing and checking our results reported in our paper:
