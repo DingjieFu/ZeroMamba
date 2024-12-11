@@ -47,7 +47,7 @@ Results of our released models using various evaluation protocols on three datas
 - **Vision Mamba dependencies**
 
   - `cp -r ZeroMamba/VisionMambaModels/Vim/mamba_ssm <your env's site-packages path>`
-- `cd ZeroMamba/VisionMambaModels/VMamba/kernels/selective_scan && pip install .`
+  - `cd ZeroMamba/VisionMambaModels/VMamba/kernels/selective_scan && pip install .`
 
 - **Other dependencies**
 
