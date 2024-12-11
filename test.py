@@ -118,7 +118,7 @@ for param in model.parameters():
 model = model.to(args.device)
 
 weightsRoot = os.path.dirname(os.path.abspath(__file__)) + "/checkpoints/"
-checkpoint_path_CZSL = weightsRoot + f"ZeroMamba_{args.dataset}_bestCZSL.pth"
+checkpoint_path_CZSL = weightsRoot + f"{args.dataset}_bestCZSL.pth"
 model.load_state_dict(torch.load(checkpoint_path_CZSL), strict=False)
 # ======================================== model config ======================================== #
 seen_att = myloader.att[myloader.seenclasses]
@@ -137,7 +137,7 @@ CZSL = compute_accuracy(zsl_unseen_pred_labels.numpy(),
 
 
 # GZSL
-checkpoint_path_GZSL = weightsRoot + f"ZeroMamba_{args.dataset}_bestGZSL.pth"
+checkpoint_path_GZSL = weightsRoot + f"{args.dataset}_bestGZSL.pth"
 model.load_state_dict(torch.load(checkpoint_path_GZSL), strict=False)
 with torch.no_grad():
     seen_pred_feats = get_pred_feats(args, model, test_seen_data_loader)

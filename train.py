@@ -170,7 +170,6 @@ for epoch in range(1, args.nepoch + 1):
         optimizer.step()
         loss_meter.update(loss.item(), batch_label.shape[0])
         tk.set_postfix({"loss": loss_meter.avg})
-        break
     print('Train: Average loss: {:.4f}'.format(loss_meter.avg))
     logger.info('Train: Average loss: {:.4f}'.format(loss_meter.avg))
     lr_scheduler.step()

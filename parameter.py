@@ -4,11 +4,11 @@ import argparse
 
 def parse_args():
     projectPath = os.path.dirname(os.path.abspath(__file__))
-    datarootPath = projectPath + "/data"
+    datarootPath = projectPath
     parser = argparse.ArgumentParser(description="Vision Mamba for ZSL")
     # ======================================== Path Config ======================================== #
     parser.add_argument('--pretrainedModelsRoot', type=str, 
-                        default="/home/fudingjie/ZeroMamba/pretrainedModels", 
+                        default = projectPath + "/checkpoints", 
                         help='Dir for pretrained weights')
     parser.add_argument('--cfgRoot', type=str, 
                         default = projectPath + "/VisionMambaModels/VMamba/configs/vssm", 
@@ -43,7 +43,6 @@ def parse_args():
     parser.add_argument('--device', default='cuda:0', help='device to use for training / testing')
     parser.add_argument('--input_size', default=448, type=int, help='image size')
     parser.add_argument('--batch_size', default=16, type=int, help='batch size')
-    parser.add_argument('--num_classes', default=1000, type=int, help='number classes')
     parser.add_argument('--gamma', default=0.95, type=float, help='calibration ratio')
     parser.add_argument('--backbone_lr', type=float, default=1e-3, help='backbone learning rate')
     parser.add_argument('--head_lr', type=float, default=1e-3, help='classifier head learning rate')
