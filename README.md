@@ -85,7 +85,7 @@ ZeroMamba/
 
 ## Training
 
-Running following commands in `./scripts/train.sh`
+Running following commands in `./scripts/train.sh`, download the pre-trained model [here](https://github.com/MzeroMiko/VMamba/releases/download/%23v2cls/vssm_small_0229_ckpt_epoch_222.pth) and place it under `./checkpoints`.
 ```
 # AWA2
 python train.py --model_name VMamba-S --model vmambav2_small_224\
