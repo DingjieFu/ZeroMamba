@@ -131,11 +131,14 @@ This project is partly based on VMamba ([github](https://github.com/MzeroMiko/VM
 If you find ZeroMamba is useful in your research or applications, please consider giving us a star 🌟 and citing it by the following BibTeX entry.
 
 ```bibtex
-@article{hou2024zeromamba,
+@inproceedings{hou2025zeromamba,
   title={ZeroMamba: Exploring Visual State Space Model for Zero-Shot Learning},
   author={Hou, Wenjin and Fu, Dingjie and Li, Kun and Chen, Shiming and Fan, Hehe and Yang, Yi},
-  journal={arXiv preprint arXiv:2408.14868},
-  year={2024}
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={39},
+  number={4},
+  pages={3527--3535},
+  year={2025}
 }
 ```
 
