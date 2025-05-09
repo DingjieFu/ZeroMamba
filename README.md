@@ -33,7 +33,7 @@ Results of our released models using various evaluation protocols on three datas
   ```shell
   conda create -n zeromamba python=3.10.13
   conda activate zeromamba
-  conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 pytorch- cuda=11.8 -c pytorch -c nvidia
+  conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 pytorch-cuda=11.8 -c pytorch -c nvidia
   ```
   
 - **Mamba dependencies**
