@@ -128,7 +128,7 @@ This project is partly based on VMamba ([github](https://github.com/MzeroMiko/VM
 
 ## Citation
 
-If you find ZeroMamba is useful in your research or applications, please consider giving us a star 🌟 and citing it by the following BibTeX entry.
+If you find ZeroMamba useful in your research or applications, please consider giving us a star 🌟 and citing it by the following BibTeX entry.
 
 ```bibtex
 @inproceedings{hou2025zeromamba,
